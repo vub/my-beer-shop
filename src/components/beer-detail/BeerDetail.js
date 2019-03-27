@@ -7,10 +7,10 @@ class BeerDetail extends Component {
     const beer = this.props.detail;
 
     return (
-      <div className="BeerDetail">
+      beer ? <div className="BeerDetail">
         <h1>Beer Detail</h1>
         <p>Name: {beer.name}</p>
-      </div>
+      </div> : ''
     );
   }
 }

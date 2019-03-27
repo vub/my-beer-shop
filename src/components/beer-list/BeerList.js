@@ -6,10 +6,19 @@ import './BeerList.css';
 
 class BeerList extends Component {
 
+  constructor(props) {
+    super(props);
+    this.handleSelectItem = this.handleSelectItem.bind(this);
+  }
+
+  handleSelectItem(item) {
+    this.props.onSelectItem(item);
+  }
+
   renderBeerList(beerList) {
     const listItems = beerList.map((item) => 
       <li key={item.id}>
-        <BeerListItem name={item.name} id={item.id} />
+        <BeerListItem name={item.name || ''} item={item} onSelectItem={this.handleSelectItem} />
       </li>
     );
     return (

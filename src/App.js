@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import _ from 'lodash';
 
 import SearchBar from './components/search-bar/SearchBar';
 import BeerList from './components/beer-list/BeerList';
@@ -11,24 +13,41 @@ class App extends Component {
     super(props);
     this.state = {
       filterText: '',
-      beerList: [
-        {
-          id: 1,
-          name: 'Buzz'
-        },
-        {
-          id: 2,
-          name: 'Trashy Blonde'
-        }
-      ]
+      beerList: [],
+      selectedBeer: undefined,
     }
     this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+    this.handleSelectItem = this.handleSelectItem.bind(this);
   }
 
   handleFilterTextChange(filterText) {
     this.setState({
       filterText: filterText
     });
+  }
+
+  handleSelectItem(item) {
+    this.setState({
+      selectedBeer: item
+    });
+  }
+
+  componentDidMount() {
+    this.getAllBeer();
+  }
+
+  getAllBeer() {
+    axios.get('https://api.punkapi.com/v2/beers')
+    .then(res => {
+      const beerList = res.data;
+      this.setState({beerList});
+    })
+  }
+
+  filteredBeerList(beerList, filterText) {
+    return _.filter(beerList, (item) => {
+      return item.name.includes(filterText);
+    })
   }
 
   render() {
@@ -38,8 +57,10 @@ class App extends Component {
           filterText={this.state.filterText}
           onFilterTextChange={this.handleFilterTextChange}
         />
-        <BeerList beerList={this.state.beerList} />
-        <BeerDetail detail={this.state.beerList[0]}/>
+        <BeerList
+          beerList={this.filteredBeerList(this.state.beerList, this.state.filterText)}
+          onSelectItem={this.handleSelectItem} />
+        <BeerDetail detail={this.state.selectedBeer}/>
       </div>
     );
   }
