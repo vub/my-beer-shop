@@ -15,11 +15,7 @@ class BeerDetail extends Component {
             <p>Description: {beer.description}</p>
             <p>ABV: {beer.abv}</p>
             <p>IBU: {beer.ibu}</p>
-          </div> : 
-          <div>
-            <h1>BEER SHOP</h1>
-            <h3>Discover the taste that you like best!</h3>
-          </div>
+          </div> : ''
         }
       </div>
     );

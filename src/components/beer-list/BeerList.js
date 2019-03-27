@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import BeerListItem from './BeerListItem';
 
@@ -6,19 +7,12 @@ import './BeerList.scss';
 
 class BeerList extends Component {
 
-  constructor(props) {
-    super(props);
-    this.handleSelectItem = this.handleSelectItem.bind(this);
-  }
-
-  handleSelectItem(item) {
-    this.props.onSelectItem(item);
-  }
-
   renderBeerList(beerList) {
     const listItems = beerList.map((item) => 
       <li key={item.id}>
-        <BeerListItem name={item.name || ''} item={item} onSelectItem={this.handleSelectItem} />
+        <Link to={`/beer/${item.id}`}>
+          <BeerListItem name={item.name || ''} item={item} />
+        </Link>
       </li>
     );
     return (

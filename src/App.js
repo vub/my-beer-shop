@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -14,21 +15,13 @@ class App extends Component {
     this.state = {
       filterText: '',
       beerList: [],
-      selectedBeer: undefined,
     }
     this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
-    this.handleSelectItem = this.handleSelectItem.bind(this);
   }
 
   handleFilterTextChange(filterText) {
     this.setState({
       filterText: filterText
-    });
-  }
-
-  handleSelectItem(item) {
-    this.setState({
-      selectedBeer: item
     });
   }
 
@@ -50,32 +43,45 @@ class App extends Component {
     })
   }
 
+  getBeer(id) {
+    return this.state.beerList.find(b => b.id === parseInt(id));
+  }
+
   render() {
     return (
-      <div className="App container">
-        <div className="row">
-          <div className="col-5">
-            <div className="menu">
-              <div className="header">
-                <h1>BEERS</h1>
+      <Router>
+        <div className="App container">
+          <div className="row">
+            <div className="col-5">
+              <div className="menu">
+                <div className="header">
+                  <h1>BEERS</h1>
+                </div>
+                <SearchBar
+                  filterText={this.state.filterText}
+                  onFilterTextChange={this.handleFilterTextChange}
+                  className="row"
+                  />
+                <BeerList
+                  beerList={this.filteredBeerList(this.state.beerList, this.state.filterText)} />
               </div>
-              <SearchBar
-                filterText={this.state.filterText}
-                onFilterTextChange={this.handleFilterTextChange}
-                className="row"
-                />
-              <BeerList
-                beerList={this.filteredBeerList(this.state.beerList, this.state.filterText)}
-                onSelectItem={this.handleSelectItem} />
             </div>
-          </div>
-          <div className="col-7">
-            <div className="detail">
-              <BeerDetail detail={this.state.selectedBeer}/>
+            <div className="col-7">
+              <div className="detail">
+                <Route exact={true} path="/" render ={() => (
+                  <div>
+                    <h1>BEER SHOP</h1>
+                    <h3>Discover the taste that you like best!</h3>
+                  </div>
+                )} />
+                <Route path="/beer/:id" render={({match}) => (
+                  <BeerDetail detail={this.getBeer(match.params.id)} />
+                )} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
