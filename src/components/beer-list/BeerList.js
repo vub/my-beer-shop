@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import BeerListItem from './BeerListItem';
 
-import './BeerList.css';
+import './BeerList.scss';
 
 class BeerList extends Component {
 

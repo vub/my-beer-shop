@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './BeerListItem.css';
+import './BeerListItem.scss';
 
 class BeerListItem extends Component {
   constructor(props) {
