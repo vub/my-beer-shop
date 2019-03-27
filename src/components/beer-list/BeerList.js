@@ -6,30 +6,21 @@ import './BeerList.css';
 
 class BeerList extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      beerList: [
-        {
-          id: 1,
-          name: 'Buzz'
-        },
-        {
-          id: 2,
-          name: 'Trashy Blonde'
-        }
-      ]
-    }
+  renderBeerList(beerList) {
+    const listItems = beerList.map((item) => 
+      <li key={item.id}>
+        <BeerListItem name={item.name} id={item.id} />
+      </li>
+    );
+    return (
+      <ul>{listItems}</ul>
+    );
   }
   
   render() {
     return (
       <div className="BeerList">
-        <ul>
-          <li><BeerListItem name="Beer 1" /></li>
-          <li><BeerListItem name="Beer 2" /></li>
-        </ul>
+        {this.renderBeerList(this.props.beerList)}
       </div>
     );
   }
