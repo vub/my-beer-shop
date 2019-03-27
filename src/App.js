@@ -22,12 +22,22 @@ class App extends Component {
         }
       ]
     }
+    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+  }
+
+  handleFilterTextChange(filterText) {
+    this.setState({
+      filterText: filterText
+    });
   }
 
   render() {
     return (
       <div className="App">
-        <SearchBar filterText={this.state.filterText} />
+        <SearchBar
+          filterText={this.state.filterText}
+          onFilterTextChange={this.handleFilterTextChange}
+        />
         <BeerList beerList={this.state.beerList} />
         <BeerDetail detail={this.state.beerList[0]}/>
       </div>
