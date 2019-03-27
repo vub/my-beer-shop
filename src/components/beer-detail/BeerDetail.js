@@ -4,9 +4,12 @@ import './BeerDetail.css';
 class BeerDetail extends Component {
 
   render() {
+    const beer = this.props.detail;
+
     return (
       <div className="BeerDetail">
         <h1>Beer Detail</h1>
+        <p>Name: {beer.name}</p>
       </div>
     );
   }

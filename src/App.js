@@ -10,6 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      filterText: '',
       beerList: [
         {
           id: 1,
@@ -26,9 +27,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <SearchBar />
-        <BeerList beerList={this.state.beerList}/>
-        <BeerDetail />
+        <SearchBar filterText={this.state.filterText} />
+        <BeerList beerList={this.state.beerList} />
+        <BeerDetail detail={this.state.beerList[0]}/>
       </div>
     );
   }
