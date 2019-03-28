@@ -49,6 +49,12 @@ my-beer-shop
 | react-router-dom | working with app router                  |
 | react-scripts    |                                          |
 
+## Improvement
+
+1. Add test case
+2. Integrate with redux to handle app state
+3. Add linter
+4. Add search debounce and loading feature
 
 ## Available Scripts to start project
 
