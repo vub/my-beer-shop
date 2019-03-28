@@ -38,14 +38,17 @@ my-beer-shop
 
 ## Dependencies
 
-- axios
-- bootstrap
-- lodash
-- node-sass
-- react
-- react-dom
-- react-router-dom
-- react-scripts
+| Package          | Reason                                   |
+|------------------|------------------------------------------|
+| axios            | easy to use, a lot feature               |
+| bootstrap        | well know and easy to use                |
+| lodash           | proven way to work with array and object |
+| node-sass        | write structure css better               |
+| react            | light weight front-end frame work        |
+| react-dom        |                                          |
+| react-router-dom | working with app router                  |
+| react-scripts    |                                          |
+
 
 ## Available Scripts to start project
 
